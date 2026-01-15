@@ -1,15 +1,29 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+const MovieAppTheme ={
+  dark : true,
+  colors:{
+    background:"#020617"
+  }
+}
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["vuetify-nuxt-module"],
+  modules: ["vuetify-nuxt-module","@unocss/nuxt"],
   vuetify: {
     moduleOptions: {
       /* module specific options */
     },
     vuetifyOptions: {
+      theme:{
+        defaultTheme:"MovieAppTheme",
+        themes:{
+          MovieAppTheme,
+        }
+      },
      icons: {
-        defaultSet: 'unocss-mdi'
+        defaultSet: 'mdi',
+        sets:['mdi','fa']
       }
     },
   },

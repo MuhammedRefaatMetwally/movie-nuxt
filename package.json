@@ -10,13 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "nuxt": "^4.2.2",
+    "pinia": "^3.0.4",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4",
     "vuetify-nuxt-module": "^0.19.2"
   },
   "devDependencies": {
     "@unocss/nuxt": "^66.6.0",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/nuxt": "^14.1.0",
     "unocss": "^66.6.0"
   }
 }

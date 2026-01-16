@@ -7,41 +7,62 @@
         <v-card class="position-relative" color="#020617">
           <v-img :src="card.image" rounded height="400"> </v-img>
           <ScoreCircular :score="card.rating" />
-          <v-card-text class="px-0">
-            <p class="text-h6 mt-1">{{ card.name }}</p>
 
-            <v-row no-gutters>
-              <v-col
-                v-for="(genre, genreIndex) in moviesStore.movies[index].genres"
-                :key="genreIndex"
-                cols="12"
-                sm="4"
-              >
-                <v-sheet class="ma-2 pa-2"> {{ genre }} </v-sheet>
-              </v-col>
-            </v-row>
-            <p class="text-grey text-body-1">{{ card.description }}</p>
+          <v-hover v-slot="{ isHovering, props }">
+            <v-card-text
+              :class="{ 'on-hover': isHovering }"
+              :elevation="isHovering ? 12 : 2"
+              v-bind="props"
+            >
+              <p class="text-h6 mt-1">{{ card.name }}</p>
 
-            <v-card-actions class="pa-4">
-              Rating ( {{ card.rating }} )
+              <v-row no-gutters>
+                <v-col
+                  v-for="(genre, genreIndex) in moviesStore.movies[index]
+                    .genres"
+                  :key="genreIndex"
+                  cols="12"
+                  sm="4"
+                >
+                  <v-sheet class="ma-2 pa-2"> {{ genre }} </v-sheet>
+                </v-col>
+              </v-row>
+              <p class="text-grey text-body-1">{{ card.description }}</p>
 
+              <v-card-actions class="pa-4">
+                Rating:
 
-              <span class="text-grey-lighten-2 text-caption me-2">
-                ({{ card.rating }})
-              </span>
+                <span class="text-grey-lighten-2 text-caption me-2">
+                  ({{ card.rating }})
+                </span>
 
-              <v-rating
-                v-model="card.rating"
-                active-color="yellow-accent-4"
-                color="white"
-                size="18"
-                half-increments
-                disabled
-              ></v-rating>
-              <v-btn class="bg-white" color="blue" icon="mdi-pen" @click=""></v-btn>
-              <v-btn  class="bg-white" color="red" icon="mdi-delete" @click="moviesStore.deleteAMovie(card.id)"></v-btn>
-            </v-card-actions>
-          </v-card-text>
+                <v-rating
+                  v-model="card.rating"
+                  active-color="yellow-accent-4"
+                  color="white"
+                  size="18"
+                  half-increments
+                ></v-rating>
+
+                <EditMovieDialog
+                  :isHovering="isHovering"
+                  :movieId="card.id"
+                  :movieName="card.name"
+                  :movieDescription="card.description"
+                  :movieImage="card.image"
+                  :movieGenres="card.genres"
+                  :movieInTheaters="card.inTheaters"
+                />
+                <v-btn
+                  :class="{ 'd-block': isHovering }"
+                  class="d-none bg-white"
+                  color="red"
+                  icon="mdi-delete"
+                  @click="moviesStore.deleteAMovie(card.id)"
+                ></v-btn>
+              </v-card-actions>
+            </v-card-text>
+          </v-hover>
         </v-card>
       </v-col>
     </v-row>
@@ -53,6 +74,18 @@ import { useMoviesStore } from "~/stores/movies";
 
 const moviesStore = useMoviesStore();
 onBeforeMount(() => {
+  moviesStore.getMovies();
+});
+
+onMounted(() => {
+  moviesStore.getMovies();
+});
+
+onBeforeUpdate(() => {
+  moviesStore.getMovies();
+});
+
+onUpdated(() => {
   moviesStore.getMovies();
 });
 </script>

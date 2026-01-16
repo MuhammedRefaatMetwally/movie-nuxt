@@ -4,7 +4,7 @@
     
     <v-card-text>
     <h1>
-    text
+    Error Message
     </h1>
     <p>{{ messageStore.message }}</p>
     </v-card-text>

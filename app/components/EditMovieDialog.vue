@@ -3,10 +3,10 @@
     <v-dialog v-model="dialog" max-width="600">
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn
-          class="text-none font-weight-regular bg-blue"
-          prepend-icon="mdi-movie"
-          text="Add a Movie"
-          variant="tonal"
+          :class="{ 'd-block': isHovering }"
+          class="d-none bg-white"
+          color="blue"
+          icon="mdi-pen"
           v-bind="activatorProps"
         ></v-btn>
       </template>
@@ -57,7 +57,7 @@
           <v-checkbox
             v-model="state.checkbox"
             :error-messages="v$.checkbox.$errors.map((e) => e.$message)"
-            label="InTheaters"
+            label="Is Theater"
             required
             @blur="v$.checkbox.$touch"
             @change="v$.checkbox.$touch"
@@ -67,11 +67,12 @@
 
           <v-card-actions>
             <v-btn text="Close" variant="plain" @click="dialog = false"></v-btn>
+
             <v-spacer></v-spacer>
 
             <v-btn
               color="primary"
-              text="Create"
+              text="Update"
               variant="tonal"
               @click="submit"
             ></v-btn>
@@ -82,14 +83,37 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { shallowRef } from "vue";
-
-const dialog = shallowRef(false);
 import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { email, required } from "@vuelidate/validators";
 
+const props = defineProps({
+  movieId: {
+    type: Number,
+  },
+  movieName: {
+    type: String,
+  },
+  movieDescription: {
+    type: String,
+  },
+  movieImage: {
+    type: String,
+  },
+  movieGenres: {
+    type: Array<String>,
+  },
+  movieInTheaters: {
+    type: Boolean,
+  },
+  isHovering: {
+    type: Boolean,
+  },
+});
+
+const dialog = shallowRef(false);
 const items = shallowRef(["Drama", "Crime", "Action", "Comedy"]);
 const select = shallowRef([]);
 const initialState = {
@@ -102,6 +126,11 @@ const initialState = {
 
 const state = reactive({
   ...initialState,
+  name: props.movieName,
+  description: props.movieDescription,
+  image: props.movieImage,
+  select: props.movieGenres,
+  checkbox: props.movieInTheaters,
 });
 
 const rules = {
@@ -119,22 +148,16 @@ const moviesStore = useMoviesStore();
 function submit() {
   v$.$validate;
   if (v$.value.$anyDirty) {
-    moviesStore.createAMovie({
+    moviesStore.updateAMovie(props.movieId, {
       name: state.name,
       description: state.description,
       image: state.image,
       genres: [...select.value],
       inTheaters: state.checkbox,
     });
-
-    dialog.value = false;
-    clear();
   }
+  console.log(`${state.name} ${state.select}`);
 }
-
-onUpdated(() => {
-  moviesStore.getMovies();
-});
 
 function clear() {
   v$.value.$reset();

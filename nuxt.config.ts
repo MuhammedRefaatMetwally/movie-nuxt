@@ -9,7 +9,12 @@ const MovieAppTheme ={
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["vuetify-nuxt-module","@unocss/nuxt"],
+  modules: [
+    "vuetify-nuxt-module",
+    "@unocss/nuxt",
+    "@vueuse/nuxt",
+    "@pinia/nuxt"
+  ],
   vuetify: {
     moduleOptions: {
       /* module specific options */

@@ -6,14 +6,11 @@
       <v-col v-for="(card, index) in moviesStore.movies" :key="index" cols="4">
         <v-card class="position-relative" color="#020617">
           <v-img :src="card.image" rounded height="400"> </v-img>
+
           <ScoreCircular :score="card.rating" />
 
           <v-hover v-slot="{ isHovering, props }">
-            <v-card-text
-              :class="{ 'on-hover': isHovering }"
-              :elevation="isHovering ? 12 : 2"
-              v-bind="props"
-            >
+            <v-card-text :class="{ 'on-hover': isHovering }" v-bind="props">
               <p class="text-h6 mt-1">{{ card.name }}</p>
 
               <v-row no-gutters>
@@ -22,9 +19,9 @@
                     .genres"
                   :key="genreIndex"
                   cols="12"
-                  sm="4"
+                  sm="2"
                 >
-                  <v-sheet class="ma-2 pa-2"> {{ genre }} </v-sheet>
+                  <v-chip class="ma-1 pa-2 bg-white"> {{ genre }} </v-chip>
                 </v-col>
               </v-row>
               <p class="text-grey text-body-1">{{ card.description }}</p>

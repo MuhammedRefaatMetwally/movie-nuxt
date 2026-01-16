@@ -16,8 +16,8 @@
 
 <style scoped>
 .circle {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   clip-path: polygon(50% 0,79% 90%,2% 35%,98% 35%,21% 90%); 
   background-color: orange;
   position: absolute;

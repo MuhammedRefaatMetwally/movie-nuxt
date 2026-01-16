@@ -21,7 +21,7 @@
                   cols="12"
                   sm="2"
                 >
-                  <v-chip class="ma-1 pa-2 bg-white"> {{ genre }} </v-chip>
+                  <v-chip class="ma-1 pa-1 bg-white"> {{ genre }} </v-chip>
                 </v-col>
               </v-row>
               <p class="text-grey text-body-1">{{ card.description }}</p>

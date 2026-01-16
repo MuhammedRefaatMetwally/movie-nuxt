@@ -1,15 +1,17 @@
 # Movie App Task
 My Approach in Backend for Movie Data:
 <br>
+<br>
 1- I wanted to use TMD Apis but I have to request the apikey so it would take time, so I did not go with it.
+<br>
 <br>
 2- JSON server: By asking the  AI if I could deploy it with my fronend and with the answer of #NO, and you have to upload that JSON server seperaterly which I could not, I think its because of the credit card.
 <br>
+<br>
 3- So when asked the AI about seraching about a free Movie API to use. It did suggest to me the https://mockapi.io/, and I did use it as the backend for the movies API, and the (GET ALL DATA, POST, DELETE) methods worked with, but UPDATE did not for some reason.
 <br>
-# So that was my approach for my Backend hopefully it doesn't violate the rules, and I told you that to be honest as much as I could.<br>
-And of course, the Frontend I did it myself. Thanks to Allah.
---------------------------------------------------------------------------------------------------------
+# So that was my approach for my Backend hopefully it doesn't violate the rules, and I told you that to be honest as much as I could.<br>And of course, the Frontend I did it myself. Thanks to Allah.
+<hr>
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
